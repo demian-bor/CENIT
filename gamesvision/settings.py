@@ -27,9 +27,6 @@ AUTH_USER_MODEL = 'admin_usuarios.Usuario'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6+e)-vvzzscm%dgav5pstcgy$8=$f2wz%n8#l8c0g9lcp+^u^%'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
