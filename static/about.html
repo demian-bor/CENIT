@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+{% load static %}
+
+    <div class="container" style="margin-top:50px;margin-bottom:80px">
+        <img src="{% static 'icons/portada.png' %}" class="img-fluid" alt="...">
+
+        <h1 class="display-1" style="text-align:center;margin:50px">Somos Games Vision!</h1>
+
+        <dl class="row" style="padding:40px">
+          <dt class="col-sm-3">Estudiantes:</dt>
+          <dd class="col-sm-9">Somos estudiantes de programacion del CENIT</dd>
+
+          <dt class="col-sm-3">Tecnología:</dt>
+          <dd class="col-sm-9">
+            <p>Python como lenguaje de programación</p>
+            <p>Django como framework de desarrollo web</p>
+            <p>Bootstrap como framework para el diseño del sitio</p>
+          </dd>
+
+          <dt class="col-sm-3">Grupo:</dt>
+          <dd class="col-sm-9">Comision 7 - Grupo 9 - Año 2023</dd>
+        </dl>
+
+        <figure class="text-center">
+          <blockquote class="blockquote">
+            <p>"No es un error, es una característica".</p>
+          </blockquote>
+          <figcaption class="blockquote-footer">
+            atte. los integrantes del grupo
+          </figcaption>
+        </figure>
+    </div>
+
+
+{% endblock contenido %}

@@ -1,0 +1,51 @@
+{% extends '../base.html' %}
+
+{% block contenido %}
+{% load static %}
+
+    <div class="container" id="ctt-maindiv">
+            <div class="ctt-container" style="margin-bottom:50px">
+                <h1>Usuario</h1>
+
+                {% if user.is_authenticated %}
+                    <div class=" image d-flex flex-column justify-content-center align-items-center">
+
+                        <img src="{% static 'icons/user-profile.png' %}" height="150" width="210" />
+
+                        <h5><b>Usuario:</b> {{ object.username }}</h5>
+                        <h5><b>Nombre:</b> {{ object.first_name }} {{ object.last_name }}</h5>
+                        <h5><b>Correo:</b> {{ object.email }}</h5>
+                        <div class=" px-2 rounded mt-4 date ">
+                            <h6 class="join">Unido el {{ object.date_joined}}</h6>
+                        </div>
+                        {% if user.username == object.username or user.is_superuser %}
+                            <div class=" d-flex mt-2">
+                                <a href="../editar-usuario/{{ object.id }}"><button class="btn1 btn-dark">Editar informacion</button></a>
+                            </div>
+                            <div class=" d-flex mt-2">
+                                <a href="{% url 'logout' %}"><button class="btn1 btn-dark">Cerrar sesion</button></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div style="width: 20%; margin:auto">
+                        <svg viewBox="0 0 18 18">
+                            <g>
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" fill="#fff3a3"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>
+                            No se encuentra logueado!
+                        </h4>
+                        <p>
+                            Este modulo es exclusivo para usuarios logueados...
+                        </p>
+                    </div>
+                {% endif %}
+
+            </div>
+    </div>
+
+{% endblock contenido %}

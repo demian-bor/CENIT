@@ -8,13 +8,21 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
+
+import pymysql
+pymysql.install_as_MySQLdb()
+import MySQLdb
 """
 
 from pathlib import Path
+import os
+from .server import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Redifinicion de modelo de usuarios
+AUTH_USER_MODEL = 'admin_usuarios.Usuario'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -31,6 +39,8 @@ ALLOWED_HOSTS = ['grupo9cenit.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'panel_principal',
+    'admin_usuarios',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +64,7 @@ ROOT_URLCONF = 'gamesvision.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'static'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,24 +72,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'panel_principal.context_processors.categorias.lista_categorias',
             ],
         },
     },
 ]
 
+
 WSGI_APPLICATION = 'gamesvision.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -116,6 +117,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_DIRS = [
+	BASE_DIR / 'static/',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -128,3 +132,15 @@ MEDIA_ROOT = '/home/grupo9cenit/gamesvision/media'
 MEDIA_URL = '/media/'
 STATIC_ROOT = '/home/grupo9cenit/gamesvision/static'
 STATIC_URL = '/static/'
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'grupo9cenit$gamesvision',
+        'USER': 'grupo9cenit',
+        'PASSWORD': 'AdminCenit',
+        'HOST':'grupo9cenit.mysql.pythonanywhere-services.com',
+        'PORT':'3306',
+    }
+}

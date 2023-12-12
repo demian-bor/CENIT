@@ -1,0 +1,41 @@
+{% extends '../base.html' %}
+
+{% block contenido %}
+
+    <div class="container" id="ctt-maindiv">
+        <div class="ctt-container" style="margin-bottom:50px">
+
+                {% if user.is_authenticated %}
+                    <div style="width: 20%; margin:auto">
+                        <svg viewBox="0 0 18 18">
+                            <g>
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" fill="#fff3a3"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>
+                            Ya se encuentra logueado!
+                        </h4>
+                        <p>
+                            Este modulo es exclusivo para usuarios no registrados...
+                        </p>
+                    </div>
+                {% else %}
+                    <h1>Login</h1>
+                    <form method="POST">{% csrf_token %}
+                        <input type="text" name="username" placeholder="User Name">
+                        <br><br>
+                        <input type="password" name="password" placeholder="Password">
+                        <br><br>
+                        <input type="submit" name="submit" value="Login">
+                    </form>
+                    <div style="margin-top:40px">
+                        <a href="{% url 'registrarse' %}"><button class="btn1 btn-dark">Registrate</button></a>
+                    </div>
+                {% endif %}
+
+        </div>
+    </div>
+
+{% endblock contenido %}
