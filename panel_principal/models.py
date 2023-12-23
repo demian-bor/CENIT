@@ -1,4 +1,5 @@
 from django.db import models
+from admin_usuarios.models import Usuario
 
 
 # Modelo para la tabla de contacto
@@ -30,7 +31,8 @@ class categorias_juegos(models.Model):
 # Modelo para el posteo de usuarios
 class posteos_usuarios(models.Model):
     post_id = models.AutoField(primary_key=True)
-    post_author = models.CharField(max_length=50, null=False)
+    #post_author = models.CharField(max_length=50, null=False)
+    post_author = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     post_title = models.CharField(max_length=50, null=False,default="Titulo del articulo")
     post_subtitle = models.CharField(max_length=100, null=False,default="Descripcion corta del articulo")
     post_description = models.TextField(null=False,default="Ingresa la descripcion larga del articulo")
@@ -53,10 +55,14 @@ class posteos_usuarios(models.Model):
 # Modelo para la lista de comentarios
 class comentarios_usuarios(models.Model):
     comment_id = models.AutoField(primary_key=True)
-    comment_author = models.CharField(max_length=50, null=False)
+    comment_author = models.ForeignKey(Usuario, related_name='comentarios', on_delete=models.CASCADE)
     comment_text = models.TextField(null=False,default="Ingresa tu comentario")
     comment_related_post = models.ForeignKey(posteos_usuarios, on_delete=models.SET_NULL, null=True, default='Sin comentarios')
     comment_date = models.DateTimeField(auto_now_add=True)
+    comment_image = models.ImageField(null=True, blank=True, upload_to='comment-images')
+
+    def __str__(self):
+        return self.comment_related_post.post_title + "-" + self.comment_author.username
 
 
 

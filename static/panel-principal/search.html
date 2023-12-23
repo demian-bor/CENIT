@@ -18,7 +18,7 @@
                         <div style="text-align: right; margin-right:5px">
                             <a style="display:inline-block;margin:5px">{{ object.post_date }}</a>
                             <a style="display:inline-block;margin:5px" href="categoria?cat={{ object.post_category.category_id }}">#{{ object.post_category }}</a>
-                            {% if user.is_authenticated and user.es_colaborador %}
+                            {% if object.post_author_id == user.id and user.es_colaborador or user.is_superuser %}
                                 <a style="display:inline-block;margin:5px" href="actualizar/{{ object.post_id }}"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a style="display:inline-block;margin:5px" href="eliminar/{{ object.post_id }}"><i class="fa-solid fa-trash"></i></a>
                             {% endif %}

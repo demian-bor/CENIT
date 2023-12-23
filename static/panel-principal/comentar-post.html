@@ -4,7 +4,7 @@
 
     <div class="container" id="ctt-maindiv">
         <div class="ctt-container" style="margin-bottom:50px">
-            <h1>Actualizar Post</h1>
+            <h1>Crear Post</h1>
 
             {% if post_success %}
                 <div style="width: 20%; margin:auto">
@@ -16,14 +16,14 @@
                 </div>
                 <div>
                     <h4>
-                        Posteo actualizado correctamente!
+                        Posteo creado correctamente!
                     </h4>
                     <p>
                         Se verá reflejado en el sitio a la brevedad posible...
                     </p>
                 </div>
             {% else %}
-                {% if object.post_author_id == user.id and user.es_colaborador or user.is_superuser %}
+                {% if user.is_authenticated %}
                     <form method="post" enctype="multipart/form-data"> {% csrf_token %}
                         {% for field in form %}
                             <div class="form-group">

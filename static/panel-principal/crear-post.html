@@ -23,7 +23,7 @@
                     </p>
                 </div>
             {% else %}
-                {% if user.is_authenticated and user.es_colaborador %}
+                {% if user.is_authenticated and user.es_colaborador or user.is_superuser %}
                     <form method="post" enctype="multipart/form-data"> {% csrf_token %}
                         {% for field in form %}
                             <div class="form-group">
