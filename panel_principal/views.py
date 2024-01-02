@@ -83,7 +83,7 @@ class comentar_publicacion(CreateView):
 # Vista para la actualizacion de comentarios
 class actualizar_comentario(UpdateView):
     model = comentarios_usuarios
-    template_name = 'panel-principal/comentar-post.html'
+    template_name = 'panel-principal/actualizar-comentario.html'
     form_class = form_comentario
 
     def get_success_url(self):
